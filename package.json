@@ -1,0 +1,25 @@
+{
+  "name": "space-launch-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/app/server.ts",
+  "scripts": {
+    "dev": "nodemon ./src/app/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.16",
+    "@types/node": "^18.11.18",
+    "axios": "^1.2.6",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "jest": "^29.4.1",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
