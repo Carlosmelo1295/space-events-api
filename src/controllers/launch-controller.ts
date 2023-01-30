@@ -8,19 +8,21 @@ export class LaunchController implements LoadLaunchUseCase {
 
 
   async load(): Promise<LaunchModel> {
-    const response = (await axios.get(this.url)).data
+    const response: any = (await axios.get(this.url)).data
 
     for (let i = 0; i < response.results.length; i++) {
+
       this.responseData = {
         name: response.results[i].name,
         description: response.results[i].description,
         feature_image: response.results[i].feature_image,
         date: response.results[i].date,
-        status: response.results[i].launches[i].status.abbrev
+        status: ''
       }
-      console.log(this.responseData)
+
     }
     console.log(this.responseData)
+
     return this.responseData
   }
 
