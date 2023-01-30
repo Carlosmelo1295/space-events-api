@@ -14,7 +14,7 @@ app.use(cors())
 const launchController = new LaunchController()
 app.get('/launch', async (req, res) => {
   try {
-    res.json(await launchController.load())
+    res.send(await launchController.load())
 
   } catch (erro) {
     res.json({ Erro: erro })

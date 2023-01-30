@@ -4,26 +4,32 @@ import { LaunchModel } from "../model/launch-model";
 
 export class LaunchController implements LoadLaunchUseCase {
   url: string = "https://ll.thespacedevs.com/2.2.0/event/upcoming/";
-  responseData: LaunchModel = null!
+  responseData: LaunchModel[] = null!
 
 
-  async load(): Promise<LaunchModel> {
-    const response: any = (await axios.get(this.url)).data
+  async load(): Promise<LaunchModel[]> {
+    let ListOsLaunchers: LaunchModel[] = []
+    let requestData: [] = (await axios.get(this.url)).data.results
 
-    for (let i = 0; i < response.results.length; i++) {
-
-      this.responseData = {
-        name: response.results[i].name,
-        description: response.results[i].description,
-        feature_image: response.results[i].feature_image,
-        date: response.results[i].date,
+    requestData.forEach((value, i) => {
+      let launchers_values = {
+        name: value['name'],
+        description: value['description'],
+        feature_image: value['feature_image'],
+        date: value['date'],
         status: ''
+
       }
+      ListOsLaunchers.push(launchers_values)
+    })
 
-    }
-    console.log(this.responseData)
 
-    return this.responseData
+
+
+
+
+    return ListOsLaunchers
   }
-
 }
+
+
