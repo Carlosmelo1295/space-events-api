@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import bodyparse from 'body-parser'
-import { LaunchController } from '../controllers/launch-controller'
+import { makeLaunchController } from '../presentation/launch-controller'
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
@@ -10,16 +10,9 @@ app.use(morgan('dev'))
 app.use(bodyparse.json())
 app.use(cors())
 
+const launchController = makeLaunchController()
 
-const launchController = new LaunchController()
-app.get('/launch', async (req, res) => {
-  try {
-    res.send(await launchController.load())
-
-  } catch (erro) {
-    res.json({ Erro: erro })
-  }
-})
+app.get('/launch', async (request, response) => response.send(await launchController.load()))
 
 const server = app.listen(3000, () => {
   console.log('App rodando.')
