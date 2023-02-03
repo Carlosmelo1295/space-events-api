@@ -12,7 +12,7 @@ app.use(cors())
 
 const launchController = makeLaunchController()
 
-app.get('/launch', async (request, response) => response.send(await launchController.load()))
+app.get('/launch', async  (request, response) => response.send(await launchController.load()))
 
 const server = app.listen(3000, () => {
   console.log('App rodando.')

@@ -1,3 +1,5 @@
+import { LaunchModel } from "../model/launch-model";
+
 export interface Translate {
-  translate(description: string): Promise<string>
+  translate(eventData: [], language: string): Promise<string>
 }

@@ -1,12 +1,15 @@
 import { Translate } from "@/domain/contracts/translate-usecase";
-// import { translate } from '@vitalets/google-translate-api';
-
+import { LaunchModel } from "@/domain/model/launch-model";
+const translate = require('translate')
 
 export class TranslatePt implements Translate {
-  text: any
-  async translate(description: string): Promise<any> {
-    // const { text } = await translate(description, { to: 'pt' });
-    // this.text = text
+
+  async translate(eventData: LaunchModel[], language: string): Promise<any> {
+    translate.engine = 'google'
+    translate.key = process.env.KEY
+    return await translate(eventData, language)
+
+
   }
 }
 
