@@ -16,18 +16,21 @@ export class LaunchController implements LoadLaunchUseCase {
   async load(): Promise<any> {
     let requestData: any[] = (await axios.get(process.env.URL!)).data.results
     let listOfEvents: LaunchModel[] = []
+
     try {
       for (let i: number = 0; i < requestData.length; i++) {
+
         const convertDataToObject: any = Object.assign({}, requestData[i]);
         const formatDate: any = moment(convertDataToObject.date).format('LLLL')
-        console.log(convertDataToObject)
+
         let event_values = {
-          name: convertDataToObject.name,
+          name: await translatePt.translate(convertDataToObject.name, 'pt'),
           description: await translatePt.translate(convertDataToObject.description, 'pt'),
           feature_image: convertDataToObject.feature_image,
           date: await translatePt.translate(formatDate, 'pt'),
-          status: await translatePt.translate(convertDataToObject.launches[i] ? convertDataToObject.launches[0].status.name : "Sem previsão", 'pt')
+          status: await translatePt.translate(convertDataToObject.launches[0] ? convertDataToObject.launches[0].status.name : "Sem status", 'pt')
         }
+
         listOfEvents.push(event_values)
       }
     } catch (err) {
